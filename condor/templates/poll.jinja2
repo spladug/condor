@@ -1,0 +1,13 @@
+{% extends "base.jinja2" %}
+{% block title %}{{ poll.title }}{% endblock %}
+{% block content %}
+<h1>{{ poll.title }}</h1>
+
+<p>you are user #{{ request.user.id }} ({{ request.user.email_address }})</p>
+
+<p>this poll was created by {{ poll.creator.email_address }}</p>
+
+{%- if poll.description: %}
+<p>{{ poll.description }}</p>
+{% endif -%}
+{% endblock %}

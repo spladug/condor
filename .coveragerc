@@ -1,0 +1,2 @@
+[run]
+omit = condor/*_thrift/*.py

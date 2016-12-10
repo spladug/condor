@@ -1,0 +1,29 @@
+{% extends "base.jinja2" %}
+{% block title %}Condor{% endblock %}
+{% block content %}
+Welcome, {{ request.user.email_address }}
+
+Create a poll!
+
+<form action="/polls" method="POST">
+
+<input type="hidden" name="csrf_token" value="{{ request.session.get_csrf_token() }}">
+
+<table>
+<tr>
+    <th><label for="title">title</label></th>
+    <td><input type="text" id="title" name="title"></td>
+</tr>
+<tr>
+    <th><label for="description">description</label></th>
+    <td>
+        <textarea id="description" name="description"></textarea>
+    </td>
+</tr>
+
+</table>
+
+<input type="submit">
+
+</form>
+{% endblock %}

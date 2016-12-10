@@ -1,0 +1,9 @@
+version: '2'
+services:
+    condor:
+        build: .
+        volumes:
+            - .:/src
+        ports:
+            - "127.0.0.1:9090:9090"
+        restart: always
