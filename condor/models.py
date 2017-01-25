@@ -5,6 +5,14 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.orm.exc import NoResultFound
 
 
+POLL_STATES = [
+    "setup",
+    "nominations",
+    "voting",
+    "closed",
+]
+
+
 Base = declarative_base()
 
 
@@ -41,7 +49,7 @@ class Poll(Base):
     __tablename__ = "poll"
 
     id = Column(Integer, primary_key=True)
-    state = Column(Enum("open", "closed"), nullable=False, default="open")
+    state = Column(Enum(*POLL_STATES), nullable=False, default="setup")
     creator_id = Column(Integer, ForeignKey("user.id"), nullable=False)
     title = Column(Unicode(80), nullable=False)
     description = Column(UnicodeText)
@@ -63,6 +71,10 @@ class Ballot(Base):
     user_id = Column(Integer, ForeignKey("user.id"), primary_key=True)
     poll_id = Column(Integer, ForeignKey("poll.id"), primary_key=True)
     # TODO: the content of the vote
+
+
+class Invite(Base):
+    __tablename__ = "invite"
 
 
 def create_schema(app_config):
